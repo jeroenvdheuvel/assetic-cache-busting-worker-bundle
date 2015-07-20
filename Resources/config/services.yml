@@ -1,0 +1,14 @@
+parameters:
+  jvdh.assetic_cache_busting.class: jvdh\AsseticWorker\CacheBustingWorker
+  jvdh.assetic_cache_busting.separator: ~
+  jvdh.assetic_cache_busting.hash_length: ~
+  jvdh.assetic_cache_busting.hash_algorithm: ~
+
+services:
+    jvdh.assetic_cache_busting:
+        class: '%jvdh.assetic_cache_busting.class%'
+        arguments:
+          - '%jvdh.assetic_cache_busting.separator%'
+          - '%jvdh.assetic_cache_busting.hash_length%'
+          - '%jvdh.assetic_cache_busting.hash_algorithm%'
+        public: false
