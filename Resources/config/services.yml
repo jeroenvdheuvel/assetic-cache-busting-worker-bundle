@@ -21,7 +21,7 @@ services:
     jvdh.assetic_cached_worker:
         class: '%jvdh.assetic_cached_worker.class%'
         arguments:
-          - '@`'
+          - '@jvdh.assetic_cache_busting'
           - '@jvdh.assetic_cache'
         public: false
 
