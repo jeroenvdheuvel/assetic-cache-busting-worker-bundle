@@ -20,6 +20,7 @@
     ],
     "require": {
         "jeroenvdheuve/assetic-cache-busting-worker": "~1.0",
+        "jeroenvdheuve/assetic-cached-worker": "@dev",
         "symfony/config": "~2.3|~3.0",
         "symfony/dependency-injection": "~2.3|~3.0",
         "symfony/http-kernel": "~2.3|~3.0",

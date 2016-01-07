@@ -17,7 +17,8 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('enabled')->defaultFalse()->end()
+                ->booleanNode('enabled')->defaultFalse()->end()
+                ->booleanNode('enable_cached_worker')->defaultFalse()->end()
                 ->scalarNode('separator')->defaultValue('-')->end()
                 ->integerNode('hash_length')->defaultValue(8)->end()
                 ->scalarNode('hash_algorithm')->defaultValue('sha1')->end()

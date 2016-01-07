@@ -29,17 +29,17 @@ class JvdhAsseticCacheBustingExtensionTest extends PHPUnit_Framework_TestCase
     {
         $this->loadExtension(array('enabled' => true));
 
-        $this->assertAsseticCacheBustingServicesIsEnabled();
+        $this->assertAsseticCacheBustingServiceIsEnabled('jvdh.assetic_cache_busting');
         $this->assertAsseticCacheBustingParameters('-', 8, 'sha1');
     }
 
 
     public function testLoadExtension_withConfigCompletelyProvided_shouldEnableCacheBustingWorkerWithAllOptions()
     {
-        $config = array('enabled' => true, 'separator' => '+', 'hash_length' => 2, 'hash_algorithm' => 'md5');
+        $config = array('enabled' => true, 'separator' => '+', 'hash_length' => 2, 'hash_algorithm' => 'md5', 'enable_cached_worker' => true);
         $this->loadExtension($config);
 
-        $this->assertAsseticCacheBustingServicesIsEnabled();
+        $this->assertAsseticCacheBustingServiceIsEnabled('jvdh.assetic_cached_worker');
         $this->assertAsseticCacheBustingParameters($config['separator'], $config['hash_length'], $config['hash_algorithm']);
     }
 
@@ -60,11 +60,15 @@ class JvdhAsseticCacheBustingExtensionTest extends PHPUnit_Framework_TestCase
         return $this->container->findTaggedServiceIds('assetic.factory_worker');
     }
 
-    private function assertAsseticCacheBustingServicesIsEnabled()
+    /**
+     * @param string $serviceId
+     */
+    private function assertAsseticCacheBustingServiceIsEnabled($serviceId)
     {
         $services = $this->findAsseticFactoryWorkerTaggedServices();
+
         $this->assertCount(1, $services);
-        $this->assertSame('jvdh.assetic_cache_busting', key($services));
+        $this->assertSame($serviceId, key($services));
     }
 
     /**

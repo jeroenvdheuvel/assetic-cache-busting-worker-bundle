@@ -4,6 +4,11 @@ parameters:
   jvdh.assetic_cache_busting.hash_length: ~
   jvdh.assetic_cache_busting.hash_algorithm: ~
 
+  jvdh.assetic_cached_worker.class: jvdh\AsseticCachedWorker\Worker\CachedWorker
+
+  jvdh.assetic_cache.class: Assetic\Cache\FilesystemCache
+  jvdh.assetic_filesystem_cache_dir: %kernel.cache_dir%/assetic-cache-busting
+
 services:
     jvdh.assetic_cache_busting:
         class: '%jvdh.assetic_cache_busting.class%'
@@ -11,4 +16,17 @@ services:
           - '%jvdh.assetic_cache_busting.separator%'
           - '%jvdh.assetic_cache_busting.hash_length%'
           - '%jvdh.assetic_cache_busting.hash_algorithm%'
+        public: false
+
+    jvdh.assetic_cached_worker:
+        class: '%jvdh.assetic_cached_worker.class%'
+        arguments:
+          - '@`'
+          - '@jvdh.assetic_cache'
+        public: false
+
+    jvdh.assetic_cache:
+        class: '%jvdh.assetic_cache.class%'
+        arguments:
+          - '%jvdh.assetic_filesystem_cache_dir%'
         public: false

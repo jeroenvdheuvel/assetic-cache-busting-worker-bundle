@@ -25,7 +25,11 @@ class JvdhAsseticCacheBustingExtension extends Extension
             $container->setParameter('jvdh.assetic_cache_busting.hash_length', $config['hash_length']);
             $container->setParameter('jvdh.assetic_cache_busting.hash_algorithm', $config['hash_algorithm']);
 
-            $service = $container->getDefinition('jvdh.assetic_cache_busting');
+            if ($config['enable_cached_worker']) {
+                $service = $container->getDefinition('jvdh.assetic_cached_worker');
+            } else {
+                $service = $container->getDefinition('jvdh.assetic_cache_busting');
+            }
             $service->addTag('assetic.factory_worker');
         }
     }
