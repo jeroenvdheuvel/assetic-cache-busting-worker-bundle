@@ -20,15 +20,16 @@
     ],
     "require": {
         "jeroenvdheuve/assetic-cache-busting-worker": "~1.0",
-        "jeroenvdheuve/assetic-cached-worker": "@dev",
         "symfony/config": "~2.3|~3.0",
         "symfony/dependency-injection": "~2.3|~3.0",
         "symfony/http-kernel": "~2.3|~3.0",
         "symfony/yaml": "~2.3|~3.0"
-
     },
     "require-dev": {
-        "phpunit/phpunit": "~4"
+        "phpunit/phpunit": ">=4,<6"
+    },
+    "suggest": {
+        "jeroenvdheuve/assetic-cached-worker": "Assetic cached worker can make twig cache generation faster. Each asset is only compiled once and cached is used after the first time."
     },
     "autoload": {
         "psr-4": { "jvdh\\AsseticCacheBustingBundle\\": "" }
